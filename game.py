@@ -20,41 +20,63 @@ def main() -> None:
           ["loc","Collapsed Room",""]
     ]
     
-    location: str = "Chamber"
+    
     death_message: str = "ERROR"
     items: list[str] = []
     room_description:str = "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table."
     '''
-    room_options: list = []
-    removed_options: list = []
+
+    location: str = "chamber_room"
+    conditions: list = []
+    
+
 
     def chamber_room() :
-        room_options: list = []
+        while location == "chamber_room":
+            room_options: list = []
+            room_description: list = []
 
-        if 'chamber1' not in removed_options:
-            room_options.append('Put the clothes on.')
-        
+            if "button_broken" in conditions:
+                button_status = "The button is broken, YOU broke it, are you happy now?"
 
+            if "standing" in conditions:
+                standing = "D"
+            else:
+                standing = "You wake up on a cold table in a dimly lit room, d"
 
-        room(
-            "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table.",
+            if 'chamber_room1' not in conditions:
+                room_options.append('Put the clothes on.')
 
-             room_options,
+            if "button_broken" not in conditions:
+                room_options.append('Press the button.')
 
-             [
-             ["item",
-              "clothes",
-              "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, it vaguely resembles a large audio jack. Moving to the clothes rack you put on some of the more intact looking clothes and an old pair of shoes. ",
-              "remove"],
-             
-             ["N/A","N/A","You press the button. Nothing happens.",],
-             
-             ["N/a","N/A","You press some random buttons on the keypad. Nothing happens.","remove"],
-             
-             ["loc","Collapsed Room",""]
-             ]
+            if 'chamber_room3' not in conditions:
+                room_options.append('Press buttons on the keypad.')
 
-            )
+            room_options.append('Leave the room.')
+
+            room_description = (f"{standing}ust coats the room and the room is empty besides the table and a clothes rack, the table has a green button and a keypad. {button_status} A door opens into a destroyed looking room in front of your table.")
+
+            room(
+                room_description,
+
+                room_options,
+
+                [
+                ["item",
+                "clothes",
+                "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, it vaguely resembles a large audio jack. Moving to the clothes rack you put on some of the more intact looking clothes and an old pair of shoes. ",
+                "remove",
+                "plugfalse"],
+                
+                ["flavor","You press the button. Nothing happens.","buttoncount"],
+                
+                ["flavor","You press some random buttons on the keypad. Nothing happens.","remove"],
+                
+                ["location","Collapsed Room",""]
+                ]
+
+                )
 
     def collapsed_room() :
         pass
