@@ -4,7 +4,8 @@ Carter Quarles - August 2026
 """
 
 def main() -> None:
-    #variable initializing/value assingment
+    '''
+    # old garbo
     list_of_options: list[str] = ['Put the clothes on.', 'Press the button.', 'Press buttons on the keypad.','Leave the room.']
     outcomes: list[list[str]] = [
          ["item",
@@ -18,32 +19,46 @@ def main() -> None:
 
           ["loc","Collapsed Room",""]
     ]
-    stored_values = {}
+    
     gamerunning = True
     location: str = "Chamber"
     death_message: str = "ERROR"
     items: list[str] = []
     room_description:str = "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table."
-    room_undescribed = True
+    '''
 
-    while gamerunning:
-        #Room description printing
-        if room_undescribed:
-            print(room_description)
-            print("")
-            room_undescribed = False
+    def chamber_room() :
+        pass
+
+    def collapsed_room() :
+        pass
     
-        # Option printing
-        for i in range(len(list_of_options)):
-            print(f"{i+1}: {list_of_options[i]}")
-        print("What do you want to do? (enter \"1\" for option 1, \"2\" for option 2 etc.)")
-        choosing = True
+    def hidden_room() :
+        pass
+    
+    def pit_room() :
+        pass
+    
+    def tool_room() :
+        pass
 
-        #Option logic/error catching
+    def computer_room() :
+        pass
+
+    # Room Logic
+    def room(Roomdesc,Options) :
+        # Description and options
+        print(Roomdesc)
+        print()
+        for i in range(len(Options)):
+            print(f"{i+1}: {Options[i]}")
+        print("What do you want to do? (enter \"1\" for option 1, \"2\" for option 2 etc.)")
+
+        choosing = True
         while choosing:
             try:
                 chosen_option:int = int(input())
-                if chosen_option <= len(list_of_options) and chosen_option >= 1:
+                if chosen_option <= len(Options) and chosen_option >= 1:
                     choosing = False
                 else: 
                     print("Choose a valid option!")
@@ -51,31 +66,6 @@ def main() -> None:
                 print("Invalid input! Try again.")
 
 
-        # Outcome logic
-        if 'loc' in outcomes[chosen_option-1]:
-            location = outcomes[chosen_option-1][1]
-        if 'item' in outcomes[chosen_option-1]:
-            items.append(outcomes[chosen_option-1][1])
-        
-        
-        # Outcome printing
-        print("")
-        print(outcomes[chosen_option-1][2])
-
-        # Entry removal
-        if 'remove' in outcomes[chosen_option-1]:
-            list_of_options.pop(chosen_option-1)
-            outcomes.pop(chosen_option-1)
-
-        # Death logic
-        if "Death" in location:
-            print(death_message)
-            old_location = location
-            location = "Chamber"
-            old_items = items
-            items = []
-            
-        
 
 # main guard
 if __name__ == "__main__":
