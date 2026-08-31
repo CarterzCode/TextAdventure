@@ -20,15 +20,41 @@ def main() -> None:
           ["loc","Collapsed Room",""]
     ]
     
-    gamerunning = True
     location: str = "Chamber"
     death_message: str = "ERROR"
     items: list[str] = []
     room_description:str = "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table."
     '''
+    room_options: list = []
+    removed_options: list = []
 
     def chamber_room() :
-        pass
+        room_options: list = []
+
+        if 'chamber1' not in removed_options:
+            room_options.append('Put the clothes on.')
+        
+
+
+        room(
+            "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table.",
+
+             room_options,
+
+             [
+             ["item",
+              "clothes",
+              "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, it vaguely resembles a large audio jack. Moving to the clothes rack you put on some of the more intact looking clothes and an old pair of shoes. ",
+              "remove"],
+             
+             ["N/A","N/A","You press the button. Nothing happens.",],
+             
+             ["N/a","N/A","You press some random buttons on the keypad. Nothing happens.","remove"],
+             
+             ["loc","Collapsed Room",""]
+             ]
+
+            )
 
     def collapsed_room() :
         pass
@@ -66,6 +92,7 @@ def main() -> None:
                 print("Invalid input! Try again.")
 
 
+    chamber_room()
 
 # main guard
 if __name__ == "__main__":
