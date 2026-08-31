@@ -22,13 +22,12 @@ def main() -> None:
     
     
     death_message: str = "ERROR"
-    items: list[str] = []
     room_description:str = "You wake up on a cold table in a dimly lit room, dust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button and a keypad. A door opens into a destroyed looking room in front of your table."
     '''
 
     location: str = "chamber_room"
-    conditions: list = []
-    
+    conditions: list[str] = []
+    items: list[str] = []
 
 
     def chamber_room() :
@@ -44,7 +43,7 @@ def main() -> None:
             else:
                 standing = "You wake up on a cold table in a dimly lit room, d"
 
-            if 'chamber_room1' not in conditions:
+            if 'clothes' not in items:
                 room_options.append('Put the clothes on.')
 
             if "button_broken" not in conditions:
@@ -67,13 +66,23 @@ def main() -> None:
                 "clothes",
                 "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, it vaguely resembles a large audio jack. Moving to the clothes rack you put on some of the more intact looking clothes and an old pair of shoes. ",
                 "remove",
+                "condition",
                 "plugfalse"],
                 
-                ["flavor","You press the button. Nothing happens.","buttoncount"],
+                ["flavor",
+                 "You press the button. Nothing happens.",
+                 "buttoncount"],
                 
-                ["flavor","You press some random buttons on the keypad. Nothing happens.","remove"],
+                ["flavor",
+                 "You press some random buttons on the keypad. Nothing happens.",
+                 "condition",
+                 "keypadpressed"],
                 
-                ["location","Collapsed Room",""]
+                ["location",
+                 "Collapsed Room",
+                 "",
+                 "condition",
+                 "standing"]
                 ]
 
                 )
@@ -102,6 +111,7 @@ def main() -> None:
             print(f"{i+1}: {Options[i]}")
         print("What do you want to do? (enter \"1\" for option 1, \"2\" for option 2 etc.)")
 
+        # Choosing logic
         choosing = True
         while choosing:
             try:
@@ -112,6 +122,8 @@ def main() -> None:
                     print("Choose a valid option!")
             except ValueError:
                 print("Invalid input! Try again.")
+
+        # Outcome logic
 
 
     chamber_room()
