@@ -142,9 +142,16 @@ def main() -> None:
                 )
 
             elif 'Leave the room.' in self.list_of_options[option-1]:
-                pass
+                self.location_outcome(
+                    COLLAPSED_ROOM,
+                    "Goobidy gab gab",
+                    False
+                )
 
+    class CollapsedRoom(Room):
+        pass
 
+    COLLAPSED_ROOM = CollapsedRoom()
     CHAMBER_ROOM = ChamberRoom()
 
     current_location = CHAMBER_ROOM
