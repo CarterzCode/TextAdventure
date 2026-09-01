@@ -20,7 +20,7 @@ def main() -> None:
             counter:int = 1
             for option in self.list_of_options:
                 print(f"{counter}: {option}")
-                counter = counter+1
+                counter += 1
 
         def input(self):
             # Takes the option input and passes it to outcome
@@ -78,7 +78,7 @@ def main() -> None:
             pass
 
         # Variable defining to manage scope 
-        new_location:Room = "PLACEHOLDER"
+        new_location:"Room" = "PLACEHOLDER"
         chosen_option:int
         list_of_options:list[str]
         dead:bool = False
@@ -95,7 +95,7 @@ def main() -> None:
             # Outcome for unique action in this room
 
             print(text)
-            self.button_press = self.button_press + 1
+            self.button_press += 1
             if self.button_press == 5:
                 self.list_of_options.pop(self.chosen_option-1)
 
