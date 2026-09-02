@@ -86,10 +86,22 @@ def main() -> None:
     class ChamberRoom(Room):
         # Variables unique to the room
 
-        button_press:int = 0
-        waking:str = "ERROR"
-        button_broken:str = ""
-        button_react:str = "You press the button. Nothing happens."
+        def initializer(self):
+            self.button_press:int = 0
+            self.waking:str = "ERROR"
+            self.button_broken:str = ""
+            self.button_react:str = "You press the button. Nothing happens."
+
+        def death_storage(self):
+            self.death_list_of_options = self.list_of_options
+            self.death_button_broken = self.button_broken
+            self.death_button_react = self.button_react
+
+        def death_button(self):
+            self.list_of_options = self.death_list_of_options
+            self.button_broken = self.death_button_broken
+            self.button_react = self.death_button_react
+
 
         def button_outcome(self,text):
             # Outcome for unique action in this room
@@ -155,6 +167,10 @@ def main() -> None:
     CHAMBER_ROOM = ChamberRoom()
 
     current_location = CHAMBER_ROOM
+    ROOMS:list[Room] = [CHAMBER_ROOM]
+
+    for room in ROOMS: 
+        
 
     # Game running logic
     gamerunning = True
