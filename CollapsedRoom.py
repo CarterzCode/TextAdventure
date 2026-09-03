@@ -1,11 +1,22 @@
 from Room import Room
 
+
+
 class CollapsedRoom(Room):
+
+    def __init__(self,items,conditions,moveroom1):
+        # asigns pointers to variables in game.py
+            self.items = items
+            self.conditions = conditions
+            self.COLLAPSED_ROOM = moveroom1
+
     def initializer(self):
+        # Initial values for when the game is initially ran, and when you die
         self.new_location:"Room" = "PLACEHOLDER"
         self.dead:bool = False
     
     def death_storage(self):
+        # Stores room conditions in case you use the death button
         pass
                     
     
