@@ -30,7 +30,7 @@ class VentRoom(Room):
     def formatter(self):
         # Formats the room description based on factors
 
-        self.room_description:str = (f"")
+        self.room_description:str = (f"TEST")
     
 
     def outcome(self,option):

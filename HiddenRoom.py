@@ -29,6 +29,10 @@ class HiddenRoom(Room):
 
     def formatter(self):
         # Formats the room description based on factors
+        if 'screwdriver' in self.items and 'computer_seen' in self.conditions:
+            if 'Take replacement parts from the computer.' not in self.list_of_options:
+                self.list_of_options.append('Take replacement parts from the computer.')
+                
 
         self.room_description:str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all.")
 
@@ -64,5 +68,12 @@ class HiddenRoom(Room):
         elif 'Skim through the long technical paper.' in self.list_of_options[option-1]:
             self.flavor_outcome(
                 "You start to skim through the paper, finding most of it uninteresting, eventually you find something that seems relevant, \"-it has become apparent that there are an infinite number of universes, hence there is an infinite amount of versions of our universe at all points along its course. This technology will allow the transfer of a consciousness to any of these universes along any point in its course-\" the rest doesn't seem relevant.",
+                True
+            )
+
+        elif 'Take replacement parts from the computer' in self.list_of_options[option-1]:
+            self.item_outcome(
+                'replacement_part',
+                "You open the computer with your screwdrier and find the replacement part.",
                 True
             )

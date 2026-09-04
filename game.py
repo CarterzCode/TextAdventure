@@ -78,6 +78,7 @@ def main() -> None:
             current_location = death_location
             items = death_items
             conditions.remove('death_button')
+            conditions.remove('died')
    
 
 # main guard

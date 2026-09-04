@@ -14,35 +14,72 @@ class ComputerRoom(Room):
         # Initial values for when the game is initially ran, and when you die
         self.new_location:"Room" = None
         self.dead:bool = False
-        self.list_of_options:list[str] = ['Put the clothes on.', 'Press the button.', 'Press buttons on the keypad.','Leave the room.']
+        self.list_of_options:list[str] = ['Reenter the pit room.', 'Try to turn the computer on.']
+        self.computer_working = False
+
 
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
         self.death_list_of_options = self.list_of_options
+        self.death_computer_working = self.computer_working
 
     def death_button(self):
         # Writes death room conditions to current conditions
     
         self.list_of_options = self.death_list_of_options 
+        self.computer_working = self.death_computer_working
+
+    def computer_outcome(self,text):
+        # Handles fixing the computer
+        print(text)
+        self.computer_working = True
+        self.list_of_options.pop(self.chosen_option-1)
 
     def formatter(self):
         # Formats the room description based on factors
+        if 'blocking_rubble' not in self.conditions:
+            self.conditions.append('blocking_rubble')
 
-        self.room_description:str = (f"")
+        if self.computer_working:
+            self.computer_status = "whirring"
+        else:
+            self.computer_status = "dormant"
+
+        if 'replacement_part' in self.items:
+            if 'Replace the broken part.' not in self.list_of_options:
+                self.list_of_options.append('Replace the broken part.')
+
+        self.room_description:str = (f"The room is dominated by a large {self.computer_status} computer, the air is stagnant and full of dust.")
     
 
     def outcome(self,option):
         # Outcome handling of chosen action
 
-        if 'A' in self.list_of_options[option-1]:
-            pass
+        if 'Reenter the pit room.' in self.list_of_options[option-1]:
+            self.location_outcome(
+                self.PIT_ROOM,
+                "You reenter the pit room and cross the beam."
+            )
 
-        elif 'C' in self.list_of_options[option-1]:
-            pass
-        
-        elif 'D' in self.list_of_options[option-1]:
-            pass
+        elif 'Try to turn the computer on.' in self.list_of_options[option-1]:
+            if self.computer_working:
+                self.item_outcome(
+                    'escape_coords',
+                    "The computer whirs to life, you look through some of the documents and find a seemingly relevant one that oulines coordinates for what looks like the table you woke up on.",
+                    True
+                )
+            else:
 
-        elif 'Leave the room.' in self.list_of_options[option-1]:
-            pass
+                self.flavor_outcome(
+                    "You try to turn the computer on, it turns on for a few seconds, displaying an error about a certain part, and then turns off.",
+                    False
+                )
+                if 'computer_seen' not in self.conditions:
+                    self.conditions.appen('computer_seen')
+
+        elif 'Replace the broken part.' in self.list_of_options[option-1]:
+            self.computer_outcome(
+                "You open up the computer with your screwdriver and replace the broken part without too much difficulty."
+            )
+

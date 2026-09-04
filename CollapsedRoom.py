@@ -49,10 +49,17 @@ class CollapsedRoom(Room):
             self.rubble_status =  "you notice the pieces of rubble that fell on you while trying to move it, and think you could more safely remove the rubble."
         else:
              self.rubble_status = "you think you could remove the rubble if you tried."
+
+        if 'glass_death' in self.conditions:
+            self.glass_observed = " covered in glass you could easily walk around now that you are paying attention. T"
+        else:
+             self.glass_observed = " clear, but t"
     
-        self.room_description:str = (f"{self.entering}The room seems to be a T-junction in a hallway, the path forward is clear, but the side path is blocked by rubble, {self.rubble_status}")
+        self.room_description:str = (f"{self.entering}The room seems to be a T-junction in a hallway, the path forward is{self.glass_observed}he side path is blocked by rubble, {self.rubble_status}")
                 
     def rubble_outcome(self,text,remove):
+        # Handles rubble logic
+        
         print(text)
         self.list_of_options.append('Enter the door hidden behind the rubble.')
         if remove:
@@ -70,7 +77,7 @@ class CollapsedRoom(Room):
         elif 'Try to remove the rubble.' in self.list_of_options[option-1]:
             if 'clothes' not in self.items and 'glass_death' not in self.conditions:
                 self.death_outcome(
-                    "As you step into the room, glass lodges itself in your feet, causing you to slip on more glass.",
+                    "As you step into the room, glass lodges itself in your feet, causing you to slip onto more glass.",
                     'glass_death'
                     )
 
@@ -87,7 +94,16 @@ class CollapsedRoom(Room):
                     )
                 
         elif 'Go to the next room.' in self.list_of_options[option-1]:
-            pass
+            if 'clothes' not in self.items and 'glass_death' not in self.conditions:
+                            self.death_outcome(
+                                "As you step into the room, glass lodges itself in your feet, causing you to slip onto more glass.",
+                                'glass_death'
+                                )
+            else:
+                self.location_outcome(
+                    self.PIT_ROOM,
+                    "You enter the room straight ahead."
+                )
 
         elif 'Enter the door hidden behind the rubble.' in self.list_of_options[option-1]:
             self.location_outcome(

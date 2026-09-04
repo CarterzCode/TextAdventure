@@ -24,7 +24,7 @@ class PitRoom(Room):
         # Initial values for when the game is initially ran, and when you die
         self.new_location:"Room" = None
         self.dead:bool = False
-        self.list_of_options:list[str] = ['Cross the pit and put some random numbers into the locked door\'s keypad.', 'Cross the pit and go to the open room.','Jump into the pit.','Leave the room.']
+        self.list_of_options:list[str] = ['Cross the pit and put some random numbers into the locked door\'s keypad.', 'Cross the pit and go to the open room.','Jump into the pit.','Go back to the hallway.']
         self.shoes_in_room:bool = False
 
     def death_storage(self):
@@ -40,12 +40,15 @@ class PitRoom(Room):
         self.shoes_in_room = self.death_shoes_in_room
 
     def shoe_outcome(self,text,shoe_status):
+        # Handles shoe logic
+
         print(text)
-        self.death_shoes_in_room = shoe_status
+        self.shoes_in_room = shoe_status
         if shoe_status:
             self.items.remove('clothes')
         else:
             self.items.append('clothes')
+        self.list_of_options.pop(self.chosen_option-1)
 
     def formatter(self):
         # Formats the room description based on factors
@@ -64,7 +67,16 @@ class PitRoom(Room):
         else:
             self.shoes = ""
 
-        self.room_description:str = (f"The room has a large pit in the middle of it where the floor has fallen out, you can't tell how deep the pit is. A beam precariously crosses the pit.{self.shoes}")
+        if 'pit_death' in self.conditions:
+            self.elite_pit_knowledge = "know how deep the pit is, unfortunately"
+        else:
+            self.elite_pit_knowledge = "can't tell how deep the pit is"
+
+        if 'code_note' in self.items:
+            if 'Cross the pit and put the note\'s numbers into the locked door\'s keypad.' and 'Enter the room with the locked door.' not in self.list_of_options:
+                self.list_of_options.append('Cross the pit and put the note\'s numbers into the locked door\'s keypad.')
+
+        self.room_description:str = (f"The room has a large pit in the middle of it where the floor has fallen out, you {self.elite_pit_knowledge}. A beam precariously crosses the pit.{self.shoes}")
     
 
     def outcome(self,option):
@@ -73,7 +85,7 @@ class PitRoom(Room):
         if 'Cross the pit and put some random numbers into the locked door\'s keypad.' in self.list_of_options[option-1]:
             if 'clothes' in self.items:
                 self.death_condition_outcome(
-                    "As you try to cross the pit, your worn out shoes lose grip and you slip."
+                    "As you try to cross the pit, your worn out shoes lose grip and you slip.",
                     'shoe_death'
                 )
             else:
@@ -84,7 +96,7 @@ class PitRoom(Room):
         elif 'Cross the pit and go to the open room.' in self.list_of_options[option-1]:
             if 'clothes' in self.items:
                 self.death_condition_outcome(
-                    "As you try to cross the pit, your worn out shoes lose grip and you slip."
+                    "As you try to cross the pit, your worn out shoes lose grip and you slip.",
                     'shoe_death'
                 )
             else:
@@ -94,11 +106,12 @@ class PitRoom(Room):
                 )
         
         elif 'Jump into the pit.' in self.list_of_options[option-1]:
-            self.death_outcome(
-                "As the seconds of your fall continue, you start to reconsider that this was a good idea."
+            self.death_condition_outcome(
+                "As the seconds of your fall continue, you start to reconsider that this was a good idea.",
+                'pit_death'
             )
 
-        elif 'Leave the room.' in self.list_of_options[option-1]:
+        elif 'Go back to the hallway.' in self.list_of_options[option-1]:
             self.location_outcome(
                 self.COLLAPSED_ROOM,
                 "You reenter the hallway."
@@ -111,7 +124,7 @@ class PitRoom(Room):
             )
         
         elif 'Take your shoes off.' in self.list_of_options[option-1]:
-            self.shoe_outcome(
+            self.shoe_outcome( 
                 "You take your shoes off.",
                 True
             )
@@ -119,7 +132,7 @@ class PitRoom(Room):
         elif 'Cross the pit and put the note\'s numbers into the locked door\'s keypad.' in self.list_of_options[option-1]:
             if 'clothes' in self.items:
                 self.death_condition_outcome(
-                    "As you try to cross the pit, your worn out shoes lose grip and you slip."
+                    "As you try to cross the pit, your worn out shoes lose grip and you slip.",
                     'shoe_death'
                 )
             else:
@@ -127,3 +140,17 @@ class PitRoom(Room):
                     self.COMPUTER_ROOM,
                     "You cross the pit and put the paper\'s numbers into the door, causing it to open. You walk in"
                 )
+                self.list_of_options.remove('Cross the pit and put the note\'s numbers into the locked door\'s keypad.')
+                self.list_of_options.append('Enter the room with the locked door.')
+
+        elif 'Enter the room with the locked door.' in self.list_of_options[option-1]:
+                    if 'clothes' in self.items:
+                        self.death_condition_outcome(
+                            "As you try to cross the pit, your worn out shoes lose grip and you slip.",
+                            'shoe_death'
+                        )
+                    else:
+                        self.location_outcome(
+                            self.COMPUTER_ROOM,
+                            "You enter the room with the now open locked door."
+                        )

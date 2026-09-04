@@ -27,6 +27,7 @@ class ChamberRoom(Room):
         self.death_list_of_options = self.list_of_options
         self.death_button_broken = self.button_broken
         self.death_button_react = self.button_react
+        self.death_button_press = self.button_press
 
     def death_button(self):
         # Writes death room conditions to current conditions
@@ -34,7 +35,7 @@ class ChamberRoom(Room):
         self.list_of_options = self.death_list_of_options
         self.button_broken = self.death_button_broken
         self.button_react = self.death_button_react
-
+        self.button_press = self.death_button_press
 
     def button_outcome(self,text):
         # Outcome for unique action in this room
@@ -47,7 +48,6 @@ class ChamberRoom(Room):
             self.button_press += 1
             if self.button_press == 5:
                 self.list_of_options.pop(self.chosen_option-1)
-            
 
     def formatter(self):
         # Formats the room description based on factors
