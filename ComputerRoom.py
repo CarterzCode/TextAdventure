@@ -9,7 +9,7 @@ class ComputerRoom(Room):
 
     def move_rooms(self,room):
         # Defines rooms you can move to
-        self.COLLAPSED_ROOM = room
+        self.PIT_ROOM = room
 
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die

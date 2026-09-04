@@ -7,15 +7,16 @@ class HiddenRoom(Room):
         self.items = items
         self.conditions = conditions
 
-    def move_rooms(self,room):
+    def move_rooms(self,room,room2):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
+        self.VENT_ROOM = room2
 
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die
         self.new_location:"Room" = None
         self.dead:bool = False
-        self.list_of_options:list[str] = ['Put the clothes on.', 'Press the button.', 'Press buttons on the keypad.','Leave the room.']
+        self.list_of_options:list[str] = ['Look through the papers.', 'Leave the room.']
 
     def death_storage(self):
         # Stores room conditions in case you use the death button

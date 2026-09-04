@@ -24,10 +24,14 @@ def main() -> None:
     COMPUTER_ROOM = ComputerRoom(items,conditions)
     VENT_ROOM = VentRoom(items,conditions)
 
-
-
-    COLLAPSED_ROOM.move_rooms(CHAMBER_ROOM)
+    COLLAPSED_ROOM.move_rooms(CHAMBER_ROOM,HIDDEN_ROOM,PIT_ROOM)
     CHAMBER_ROOM.move_rooms(COLLAPSED_ROOM)
+    PIT_ROOM.move_rooms(COLLAPSED_ROOM,COMPUTER_ROOM,TOOL_ROOM)
+    HIDDEN_ROOM.move_rooms(COLLAPSED_ROOM,VENT_ROOM)
+    TOOL_ROOM.move_rooms(PIT_ROOM)
+    COMPUTER_ROOM.move_rooms(PIT_ROOM)
+    VENT_ROOM.move_rooms(HIDDEN_ROOM,CHAMBER_ROOM)
+
 
     current_location = CHAMBER_ROOM
     ROOMS:list = [CHAMBER_ROOM,COLLAPSED_ROOM,PIT_ROOM,HIDDEN_ROOM,TOOL_ROOM,COMPUTER_ROOM,VENT_ROOM]

@@ -7,9 +7,11 @@ class PitRoom(Room):
         self.items = items
         self.conditions = conditions
 
-    def move_rooms(self,room):
+    def move_rooms(self,room,room2,room3):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
+        self.COMPUTER_ROOM = room2
+        self.TOOL_ROOM = room3
 
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die

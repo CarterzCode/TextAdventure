@@ -7,9 +7,10 @@ class VentRoom(Room):
         self.items = items
         self.conditions = conditions
 
-    def move_rooms(self,room):
+    def move_rooms(self,room,room2):
         # Defines rooms you can move to
-        self.COLLAPSED_ROOM = room
+        self.HIDDEN_ROOM = room
+        self.CHAMBER_ROOM = room2
 
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die
