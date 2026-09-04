@@ -1,7 +1,6 @@
 from Room import Room
 
 class HiddenRoom(Room):
-    # Variables unique to the room
 
     def __init__(self,items,conditions):
         self.items = items
@@ -31,20 +30,39 @@ class HiddenRoom(Room):
     def formatter(self):
         # Formats the room description based on factors
 
-        self.room_description:str = (f"")
-    
+        self.room_description:str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all.")
+
+    def paper_outcome(self,text,remove):
+        print(text)
+        self.list_of_options.append("Skim through the long technical paper.")
+        self.list_of_options.append("Grab the note.")
+        if remove:
+            self.list_of_options.pop(self.chosen_option-1)
 
     def outcome(self,option):
         # Outcome handling of chosen action
 
-        if 'A' in self.list_of_options[option-1]:
-            pass
-
-        elif 'C' in self.list_of_options[option-1]:
-            pass
-        
-        elif 'D' in self.list_of_options[option-1]:
-            pass
+        if 'Look through the papers.' in self.list_of_options[option-1]:
+            self.paper_outcome(
+                "You skim through the papers, finding most of them to be boring technical papers, you find an unlabled note with some numbers and a long technical paper that seems marginally interesting.",
+                True
+            )
 
         elif 'Leave the room.' in self.list_of_options[option-1]:
-            pass
+            self.location_outcome(
+                self.COLLAPSED_ROOM,
+                "You reenter the hallway."
+            )
+        
+        elif 'Grab the note.' in self.list_of_options[option-1]:
+            self.item_outcome(
+                'code_note',
+                "You grab the note with the numbers.",
+                True
+            )
+
+        elif 'Skim through the long technical paper.' in self.list_of_options[option-1]:
+            self.flavor_outcome(
+                "You start to skim through the paper, finding most of it uninteresting, eventually you find something that seems relevant, \"-it has become apparent that there are an infinite number of universes, hence there is an infinite amount of versions of our universe at all points along its course. This technology will allow the transfer of a consciousness to any of these universes along any point in its course-\" the rest doesn't seem relevant.",
+                True
+            )

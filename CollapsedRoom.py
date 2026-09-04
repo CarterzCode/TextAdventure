@@ -15,9 +15,13 @@ class CollapsedRoom(Room):
             print(text)
             self.dead = True
 
-    def move_rooms(self,room):
+    def move_rooms(self,room,room2,room3):
             # Defines rooms you can move to
             self.CHAMBER_ROOM = room
+            self.HIDDEN_ROOM = room2
+            self.PIT_ROOM = room3
+            
+
 
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die
@@ -86,4 +90,7 @@ class CollapsedRoom(Room):
             pass
 
         elif 'Enter the door hidden behind the rubble.' in self.list_of_options[option-1]:
-            pass
+            self.location_outcome(
+                 self.HIDDEN_ROOM,
+                 "You enter the room hidden behind the now removed rubble."
+            )

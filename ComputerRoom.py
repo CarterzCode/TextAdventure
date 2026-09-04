@@ -1,7 +1,6 @@
 from Room import Room
 
 class ComputerRoom(Room):
-    # Variables unique to the room
 
     def __init__(self,items,conditions):
         self.items = items
