@@ -2,7 +2,7 @@ class Room():
 
 
     # Base structure for rooms
-    new_location:"Room" = "PLACEHOLDER"
+    new_location:"Room" = None
     chosen_option:int
     list_of_options:list[str]
     dead:bool = False
@@ -47,13 +47,11 @@ class Room():
         if remove:
             self.list_of_options.pop(self.chosen_option-1)
 
-    def location_outcome(self,location,text,remove):
+    def location_outcome(self,location,text):
         # Outcome handling for locations
 
         self.new_location = location
         print(text)
-        if remove:                    
-            self.list_of_options.pop(self.chosen_option-1)
 
     def death_outcome(self,text):
         # Outcome handling for death

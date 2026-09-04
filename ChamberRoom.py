@@ -1,12 +1,15 @@
 from Room import Room
 
 class ChamberRoom(Room):
-        # Variables unique to the room
+    # Variables unique to the room
 
-    def __init__(self,items,conditions,moveroom1):
+    def __init__(self,items,conditions):
         self.items = items
         self.conditions = conditions
-        self.COLLAPSED_ROOM = moveroom1
+
+    def move_rooms(self,room):
+        # Defines rooms you can move to
+        self.COLLAPSED_ROOM = room
 
 
     def initializer(self):
@@ -16,8 +19,9 @@ class ChamberRoom(Room):
         self.waking:str = "ERROR"
         self.button_broken:str = ""
         self.button_react:str = "You press the button. Nothing happens."
-        self.new_location:"Room" = "PLACEHOLDER"
+        self.new_location:"Room" = None
         self.dead:bool = False
+        self.list_of_options:list[str] = ['Put the clothes on.', 'Press the button.', 'Press buttons on the keypad.','Leave the room.']
 
     def death_storage(self):
         # Stores room conditions in case you use the death button
@@ -28,7 +32,7 @@ class ChamberRoom(Room):
 
     def death_button(self):
         # Writes death room conditions to current conditions
-        
+    
         self.list_of_options = self.death_list_of_options
         self.button_broken = self.death_button_broken
         self.button_react = self.death_button_react
@@ -75,13 +79,13 @@ class ChamberRoom(Room):
             self.button_status = ""
 
         if 'plug' in self.conditions:
-            self.plug = "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, it vaguely resembles a large audio jack. "
+            self.plug = "While trying to get up from the table you realize there is something attached to the back of your head, you pull it out without much resistance but are alarmed to find it went into your head, " \
+            "it vaguely resembles a large audio jack. "
         else: 
             self.plug = ""
 
         self.room_description:str = (f"{self.waking}ust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button {self.button_status}and a keypad. {self.button_broken}A door opens into a destroyed looking room in front of your table.")
     
-    list_of_options:list[str] = ['Put the clothes on.', 'Press the button.', 'Press buttons on the keypad.','Leave the room.']
 
     def outcome(self,option):
         # Outcome handling of chosen action
@@ -109,8 +113,7 @@ class ChamberRoom(Room):
         elif 'Leave the room.' in self.list_of_options[option-1]:
             self.location_outcome(
                 self.COLLAPSED_ROOM,
-                (f"{self.plug}You walk out of the door into the next room."),
-                False
+                (f"{self.plug}You walk out of the door into the next room.")
             )
             if 'plug' in self.conditions:
                 self.conditions.remove('plug')
