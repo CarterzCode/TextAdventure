@@ -11,12 +11,11 @@ class ChamberRoom(Room):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
 
-
     def initializer(self):
         # Initial values for when the game is initially ran, and when you die
 
         self.button_press:int = 0
-        self.waking:str = "ERROR"
+        self.waking:str = None
         self.button_broken:str = ""
         self.button_react:str = "You press the button. Nothing happens."
         self.new_location:"Room" = None

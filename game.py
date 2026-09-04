@@ -10,7 +10,7 @@ from CollapsedRoom import CollapsedRoom
 def main() -> None:
     
     items: list[str] = []
-    conditions: list[str] = ['waking','plug']
+    conditions: list[str] = ['waking','plug','entering']
     
     COLLAPSED_ROOM = CollapsedRoom(items,conditions)
     CHAMBER_ROOM = ChamberRoom(items,conditions)
