@@ -5,7 +5,11 @@ Carter Quarles - September 2026
 
 from ChamberRoom import ChamberRoom
 from CollapsedRoom import CollapsedRoom
- 
+from PitRoom import PitRoom
+from HiddenRoom import HiddenRoom
+from ToolRoom import ToolRoom
+from ComputerRoom import ComputerRoom
+from VentRoom import VentRoom
 
 def main() -> None:
     
@@ -14,12 +18,19 @@ def main() -> None:
     
     COLLAPSED_ROOM = CollapsedRoom(items,conditions)
     CHAMBER_ROOM = ChamberRoom(items,conditions)
+    PIT_ROOM = PitRoom(items,conditions)
+    HIDDEN_ROOM = HiddenRoom(items,conditions)
+    TOOL_ROOM = ToolRoom(items,conditions)
+    COMPUTER_ROOM = ComputerRoom(items,conditions)
+    VENT_ROOM = VentRoom(items,conditions)
+
+
 
     COLLAPSED_ROOM.move_rooms(CHAMBER_ROOM)
     CHAMBER_ROOM.move_rooms(COLLAPSED_ROOM)
 
     current_location = CHAMBER_ROOM
-    ROOMS:list = [CHAMBER_ROOM,COLLAPSED_ROOM]
+    ROOMS:list = [CHAMBER_ROOM,COLLAPSED_ROOM,PIT_ROOM,HIDDEN_ROOM,TOOL_ROOM,COMPUTER_ROOM,VENT_ROOM]
 
     for room in ROOMS: 
         # Initializes the rooms
