@@ -30,7 +30,7 @@ class HiddenRoom(Room):
     def formatter(self):
         # Formats the room description based on factors
         if 'screwdriver' in self.items and 'computer_seen' in self.conditions:
-            if 'Take replacement parts from the computer.' not in self.list_of_options:
+            if 'Take replacement parts from the computer.' not in self.list_of_options and 'replacement_part' not in self.items:
                 self.list_of_options.append('Take replacement parts from the computer.')
                 
 

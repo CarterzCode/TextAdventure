@@ -73,8 +73,9 @@ class PitRoom(Room):
             self.elite_pit_knowledge = "can't tell how deep the pit is"
 
         if 'code_note' in self.items:
-            if 'Cross the pit and put the note\'s numbers into the locked door\'s keypad.' and 'Enter the room with the locked door.' not in self.list_of_options:
-                self.list_of_options.append('Cross the pit and put the note\'s numbers into the locked door\'s keypad.')
+            if 'Enter the room with the locked door.' not in self.list_of_options:
+                if 'Cross the pit and put the note\'s numbers into the locked door\'s keypad.' not in self.list_of_options:
+                    self.list_of_options.append('Cross the pit and put the note\'s numbers into the locked door\'s keypad.')
 
         self.room_description:str = (f"The room has a large pit in the middle of it where the floor has fallen out, you {self.elite_pit_knowledge}. A beam precariously crosses the pit.{self.shoes}")
     

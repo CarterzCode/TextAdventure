@@ -47,7 +47,7 @@ class ComputerRoom(Room):
             self.computer_status = "dormant"
 
         if 'replacement_part' in self.items:
-            if 'Replace the broken part.' not in self.list_of_options:
+            if 'Replace the broken part.' not in self.list_of_options and not self.computer_working:
                 self.list_of_options.append('Replace the broken part.')
 
         self.room_description:str = (f"The room is dominated by a large {self.computer_status} computer, the air is stagnant and full of dust.")
@@ -76,7 +76,7 @@ class ComputerRoom(Room):
                     False
                 )
                 if 'computer_seen' not in self.conditions:
-                    self.conditions.appen('computer_seen')
+                    self.conditions.append('computer_seen')
 
         elif 'Replace the broken part.' in self.list_of_options[option-1]:
             self.computer_outcome(
