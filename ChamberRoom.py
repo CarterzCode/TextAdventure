@@ -121,5 +121,5 @@ class ChamberRoom(Room):
             if 'plug' in self.conditions:
                 self.conditions.remove('plug')
 
-        elif 'Press buttons on the keypad.' in self.list_of_options[option-1]:
+        elif 'Put in the coordinates the computer listed.' in self.list_of_options[option-1]:
             self.win_outcome()

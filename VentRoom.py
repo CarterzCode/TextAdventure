@@ -25,7 +25,7 @@ class VentRoom(Room):
 
     def formatter(self):
         # Formats the room description based on factors
-        if 'escape_coords' in self.conditions:
+        if 'escape_coords' in self.items:
             if 'Enter the room you woke up in.' not in self.list_of_options:
                 self.list_of_options.append('Enter the room you woke up in.')
 

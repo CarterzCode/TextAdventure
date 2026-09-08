@@ -32,7 +32,8 @@ class HiddenRoom(Room):
         if 'screwdriver' in self.items:
             self.vent_seen:str = "You notice a large vent on the wall, you think you might be able to fit into it if you removed the cover."
             if 'Unscrew the vent.' not in self.list_of_options:
-                self.list_of_options.append('Unscrew the vent.')
+                if 'Enter the vent.' not in self.list_of_options:
+                    self.list_of_options.append('Unscrew the vent.')
         else:
             self.vent_seen:str = ""
 
