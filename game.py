@@ -52,7 +52,7 @@ def main() -> None:
     gamerunning = True
     while gamerunning:
         # Runs the game with function calls
-        
+
         if current_location.win:
             gamerunning = False
             print("END")

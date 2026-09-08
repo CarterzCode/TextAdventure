@@ -37,7 +37,7 @@ class Room():
                         print("Choose a valid option!")
                 except ValueError:
                     print("Invalid input! Try again.")
-        self.outcome(self.chosen_option)
+        self.outcome(self.chosen_option: int)
 
     def outcome(self,option):
         # Placeholder for children classes
@@ -45,7 +45,7 @@ class Room():
         pass
 
     def item_outcome(self,item,text,remove):
-        # Outcome handling for items
+        # Outcome handling for items, item is for the added item, text is for priting, remove is to see if the option should be removed or not
 
         self.items.append(item)
         print(text)
@@ -53,19 +53,19 @@ class Room():
             self.list_of_options.pop(self.chosen_option-1)
 
     def location_outcome(self,location,text):
-        # Outcome handling for locations
+        # Outcome handling for locations, location is for the new location, text is for printing
 
         self.new_location = location
         print(text)
 
     def death_outcome(self,text):
-        # Outcome handling for death
+        # Outcome handling for death, text is for printing
 
         print(text)
         self.dead = True
 
     def flavor_outcome(self,text,remove):
-        # Outcome handling for non-impactful outcomes
+        # Outcome handling for non-impactful outcomes, text is for printing, remove is to see if the option should be removed or not
 
         print(text)
         if remove:

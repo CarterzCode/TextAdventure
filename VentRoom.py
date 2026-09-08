@@ -37,7 +37,7 @@ class VentRoom(Room):
         self.win = True
 
     def outcome(self,option):
-        # Outcome handling of chosen action
+        # Outcome handling of chosen action, option is for chosen option
 
         if 'Reenter the hidden room.' in self.list_of_options[option-1]:
             self.location_outcome(

@@ -34,7 +34,7 @@ class ToolRoom(Room):
     
 
     def outcome(self,option):
-        # Outcome handling of chosen action
+        # Outcome handling of chosen action, option is for chosen option
 
         if 'Reenter the pit room.' in self.list_of_options[option-1]:
             self.location_outcome(

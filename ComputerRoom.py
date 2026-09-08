@@ -2,7 +2,7 @@ from Room import Room
 
 class ComputerRoom(Room):
 
-    def move_rooms(self,room):
+    def move_rooms(self,room: "Room"):
         # Defines rooms you can move to
         self.PIT_ROOM = room
 
@@ -11,14 +11,14 @@ class ComputerRoom(Room):
         self.new_location:"Room" = None
         self.dead:bool = False
         self.list_of_options:list[str] = ['Reenter the pit room.', 'Try to turn the computer on.']
-        self.computer_working = False
+        self.computer_working: bool = False
 
 
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
-        self.death_list_of_options = self.list_of_options
-        self.death_computer_working = self.computer_working
+        self.death_list_of_options: str = self.list_of_options
+        self.death_computer_working: str = self.computer_working
 
     def death_button(self):
         # Writes death room conditions to current conditions
@@ -26,7 +26,7 @@ class ComputerRoom(Room):
         self.list_of_options = self.death_list_of_options 
         self.computer_working = self.death_computer_working
 
-    def computer_outcome(self,text):
+    def computer_outcome(self,text: str):
         # Handles fixing the computer
         print(text)
         self.computer_working = True
@@ -38,9 +38,9 @@ class ComputerRoom(Room):
             self.conditions.append('blocking_rubble')
 
         if self.computer_working:
-            self.computer_status = "whirring"
+            self.computer_status: str = "whirring"
         else:
-            self.computer_status = "dormant"
+            self.computer_status: str = "dormant"
 
         if 'replacement_part' in self.items:
             if 'Replace the broken part.' not in self.list_of_options and not self.computer_working:
@@ -49,8 +49,8 @@ class ComputerRoom(Room):
         self.room_description:str = (f"The room is dominated by a large {self.computer_status} computer, the air is stagnant and full of dust.")
     
 
-    def outcome(self,option):
-        # Outcome handling of chosen action
+    def outcome(self,option: int):
+        # Outcome handling of chosen action, option is for the chosen option
 
         if 'Reenter the pit room.' in self.list_of_options[option-1]:
             self.location_outcome(

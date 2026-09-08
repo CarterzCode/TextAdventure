@@ -2,7 +2,7 @@ from Room import Room
 
 class HiddenRoom(Room):
 
-    def move_rooms(self,room,room2):
+    def move_rooms(self,room: "Room",room2: "Room"):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
         self.VENT_ROOM = room2
@@ -35,24 +35,26 @@ class HiddenRoom(Room):
                 if 'Enter the vent.' not in self.list_of_options:
                     self.list_of_options.append('Unscrew the vent.')
         else:
-            self.vent_seen:str = ""
+            self.vent_seen: str = ""
 
-        self.room_description:str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all. {self.vent_seen}")
+        self.room_description: str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all. {self.vent_seen}")
 
-    def paper_outcome(self,text):
+    def paper_outcome(self,text: str):
+        # Outcome unique to this room, adds two more options, text is for printing
         print(text)
         self.list_of_options.append("Skim through the long technical paper.")
         self.list_of_options.append("Grab the note.")
         self.list_of_options.pop(self.chosen_option-1)
 
-    def vent_outcome(self,text):
+    def vent_outcome(self,text: str):
+        # Outcome unique to this room, adds an options, text is for printing
         print(text)
         self.list_of_options.append('Enter the vent.')
         self.list_of_options.pop(self.chosen_option-1)
 
 
-    def outcome(self,option):
-        # Outcome handling of chosen action
+    def outcome(self,option: int):
+        # Outcome handling of chosen action, option is for the chosen option
 
         if 'Look through the papers.' in self.list_of_options[option-1]:
             self.paper_outcome(

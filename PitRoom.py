@@ -4,7 +4,7 @@ from Room import Room
 class PitRoom(Room):
     # WELCOME TO SHOE CENTRAL!!!
 
-    def move_rooms(self,room,room2,room3):
+    def move_rooms(self,room: "Room",room2: "Room",room3: "Room"):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
         self.COMPUTER_ROOM = room2
@@ -77,7 +77,7 @@ class PitRoom(Room):
     
 
     def outcome(self,option):
-        # Outcome handling of chosen action
+        # Outcome handling of chosen action, option is for the chosen option
 
         if 'Cross the pit and put some random numbers into the locked door\'s keypad.' in self.list_of_options[option-1]:
             if 'clothes' in self.items:

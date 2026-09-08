@@ -87,11 +87,12 @@ class ChamberRoom(Room):
         self.room_description:str = (f"{self.waking}ust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button {self.button_status}and a keypad. {self.button_broken}{self.door_open}")
 
     def win_outcome(self):
+        # Outcome for winning, prints text and turns win on
         print("You plug yourself back into the machine and put the coordinates in, in an instant you find yourself on top of a hill, the horizon nothing but endless rolling fields of verdant grass, you feel peaceful.")
         self.win = True
 
     def outcome(self,option):
-        # Outcome handling of chosen action
+        # Outcome handling of chosen action, option is for chosen option
 
         if 'Put the clothes on.' in self.list_of_options[option-1]:
             self.item_outcome(
