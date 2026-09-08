@@ -4,11 +4,6 @@ from Room import Room
 
 class CollapsedRoom(Room):
 
-    def __init__(self,items,conditions):
-        # asigns pointers to variables in game.py
-            self.items = items
-            self.conditions = conditions
-
     def death_outcome(self,text,condition):
             # Outcome handling for death
             self.conditions.append(condition)
@@ -45,17 +40,33 @@ class CollapsedRoom(Room):
         else:
             self.entering = ""
 
-        if 'rubble_death' in self.conditions:
-            self.rubble_status =  "you notice the pieces of rubble that fell on you while trying to move it, and think you could more safely remove the rubble."
+        if 'rubble_death' in self.conditions and 'Enter the door hidden behind the rubble.' not in self.list_of_options:
+            self.rubble_status =  ", you notice the pieces of rubble that fell on you while trying to move it, and think you could more safely remove the rubble."
+        elif 'rubble_death' not in self.conditions:
+            self.rubble_status = ", you think you could remove the rubble if you tried."
         else:
-             self.rubble_status = "you think you could remove the rubble if you tried."
+            self.rubble_status = ""
 
         if 'glass_death' in self.conditions:
             self.glass_observed = " covered in glass you could easily walk around now that you are paying attention. T"
         else:
-             self.glass_observed = " clear, but t"
-    
-        self.room_description:str = (f"{self.entering}The room seems to be a T-junction in a hallway, the path forward is{self.glass_observed}he side path is blocked by rubble, {self.rubble_status}")
+            self.glass_observed = " clear, but t"
+
+        if 'blocking_rubble' in self.conditions:
+            if 'Enter the room you woke up in.' in self.list_of_options:
+                self.list_of_options.remove('Enter the room you woke up in.')
+            
+        if 'blocking_rubble' in self.conditions:
+            self.chamber_rubble:str = " The entrance to the room you woke up in seems to have had rubble fall in front of it, blocking the door."
+        else:
+            self.chamber_rubble:str = ""
+
+        if 'Enter the door hidden behind the rubble.' in self.list_of_options:
+            self.door_rubble:str = "clear now, with the door hidden behind the rubble accessible."
+        else:
+            self.door_rubble:str = "blocked by rubble"
+
+        self.room_description:str = (f"{self.entering}The room seems to be a T-junction in a hallway, the path forward is{self.glass_observed}he side path is {self.door_rubble}{self.rubble_status}{self.chamber_rubble}")
                 
     def rubble_outcome(self,text,remove):
         # Handles rubble logic
@@ -95,10 +106,10 @@ class CollapsedRoom(Room):
                 
         elif 'Go to the next room.' in self.list_of_options[option-1]:
             if 'clothes' not in self.items and 'glass_death' not in self.conditions:
-                            self.death_outcome(
-                                "As you step into the room, glass lodges itself in your feet, causing you to slip onto more glass.",
-                                'glass_death'
-                                )
+                self.death_outcome(
+                    "As you step into the room, glass lodges itself in your feet, causing you to slip onto more glass.",
+                    'glass_death'
+                    )
             else:
                 self.location_outcome(
                     self.PIT_ROOM,

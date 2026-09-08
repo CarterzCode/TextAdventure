@@ -2,10 +2,6 @@ from Room import Room
 
 class HiddenRoom(Room):
 
-    def __init__(self,items,conditions):
-        self.items = items
-        self.conditions = conditions
-
     def move_rooms(self,room,room2):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
@@ -32,24 +28,34 @@ class HiddenRoom(Room):
         if 'screwdriver' in self.items and 'computer_seen' in self.conditions:
             if 'Take replacement parts from the computer.' not in self.list_of_options and 'replacement_part' not in self.items:
                 self.list_of_options.append('Take replacement parts from the computer.')
-                
 
-        self.room_description:str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all.")
+        if 'screwdriver' in self.items:
+            self.vent_seen:str = "You notice a large vent on the wall, you think you might be able to fit into it if you removed the cover."
+            if 'Unscrew the vent.' not in self.list_of_options:
+                self.list_of_options.append('Unscrew the vent.')
+        else:
+            self.vent_seen:str = ""
 
-    def paper_outcome(self,text,remove):
+        self.room_description:str = (f"The room is dim and has tables covered in papers lining the walls. A computer sits dormant in one corner and refuses to turn on at all. {self.vent_seen}")
+
+    def paper_outcome(self,text):
         print(text)
         self.list_of_options.append("Skim through the long technical paper.")
         self.list_of_options.append("Grab the note.")
-        if remove:
-            self.list_of_options.pop(self.chosen_option-1)
+        self.list_of_options.pop(self.chosen_option-1)
+
+    def vent_outcome(self,text):
+        print(text)
+        self.list_of_options.append('Enter the vent.')
+        self.list_of_options.pop(self.chosen_option-1)
+
 
     def outcome(self,option):
         # Outcome handling of chosen action
 
         if 'Look through the papers.' in self.list_of_options[option-1]:
             self.paper_outcome(
-                "You skim through the papers, finding most of them to be boring technical papers, you find an unlabled note with some numbers and a long technical paper that seems marginally interesting.",
-                True
+                "You skim through the papers, finding most of them to be boring technical papers, you find an unlabled note with some numbers and a long technical paper that seems marginally interesting."
             )
 
         elif 'Leave the room.' in self.list_of_options[option-1]:
@@ -71,9 +77,20 @@ class HiddenRoom(Room):
                 True
             )
 
-        elif 'Take replacement parts from the computer' in self.list_of_options[option-1]:
+        elif 'Take replacement parts from the computer.' in self.list_of_options[option-1]:
             self.item_outcome(
                 'replacement_part',
                 "You open the computer with your screwdrier and find the replacement part.",
                 True
+            )
+
+        elif 'Unscrew the vent.' in self.list_of_options[option-1]:
+            self.vent_outcome(
+                "You unscrew the vent with your screwdriver and take it off."
+            )
+
+        elif 'Enter the vent.' in self.list_of_options[option-1]:
+            self.location_outcome(
+                self.VENT_ROOM,
+                "You crawl into the vent."
             )

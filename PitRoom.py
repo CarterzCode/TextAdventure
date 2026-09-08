@@ -4,10 +4,6 @@ from Room import Room
 class PitRoom(Room):
     # WELCOME TO SHOE CENTRAL!!!
 
-    def __init__(self,items,conditions):
-        self.items = items
-        self.conditions = conditions
-
     def move_rooms(self,room,room2,room3):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
@@ -68,9 +64,9 @@ class PitRoom(Room):
             self.shoes = ""
 
         if 'pit_death' in self.conditions:
-            self.elite_pit_knowledge = "know how deep the pit is, unfortunately"
+            self.elite_pit_knowledge: str = "know how deep the pit is, unfortunately"
         else:
-            self.elite_pit_knowledge = "can't tell how deep the pit is"
+            self.elite_pit_knowledge: str = "can't tell how deep the pit is"
 
         if 'code_note' in self.items:
             if 'Enter the room with the locked door.' not in self.list_of_options:

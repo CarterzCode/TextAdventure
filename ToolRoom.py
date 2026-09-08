@@ -2,10 +2,6 @@ from Room import Room
 
 class ToolRoom(Room):
 
-    def __init__(self,items,conditions):
-        self.items = items
-        self.conditions = conditions
-
     def move_rooms(self,room):
         # Defines rooms you can move to
         self.PIT_ROOM = room

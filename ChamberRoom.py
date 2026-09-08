@@ -2,10 +2,6 @@ from Room import Room
 
 class ChamberRoom(Room):
 
-    def __init__(self,items,conditions):
-        self.items = items
-        self.conditions = conditions
-
     def move_rooms(self,room):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
@@ -82,8 +78,17 @@ class ChamberRoom(Room):
         else: 
             self.plug = ""
 
-        self.room_description:str = (f"{self.waking}ust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button {self.button_status}and a keypad. {self.button_broken}A door opens into a destroyed looking room in front of your table.")
-    
+        if 'blocking_rubble' in self.conditions:
+            self.door_open = "Rubble blocks the exit to the room"
+            self.list_of_options.append("Put in the coordinates the computer listed.")
+        else:
+            self.door_open = "A door opens into a destroyed looking room in front of your table."
+
+        self.room_description:str = (f"{self.waking}ust coats the room except for the oddly placed clothes rack in the otherwise barren room, you notice the table has a green button {self.button_status}and a keypad. {self.button_broken}{self.door_open}")
+
+    def win_outcome(self):
+        print("You plug yourself back into the machine and put the coordinates in, in an instant you find yourself on top of a hill, the horizon nothing but endless rolling fields of verdant grass, you feel peaceful.")
+        self.win = True
 
     def outcome(self,option):
         # Outcome handling of chosen action
@@ -115,3 +120,6 @@ class ChamberRoom(Room):
             )
             if 'plug' in self.conditions:
                 self.conditions.remove('plug')
+
+        elif 'Press buttons on the keypad.' in self.list_of_options[option-1]:
+            self.win_outcome()

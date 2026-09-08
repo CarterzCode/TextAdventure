@@ -6,10 +6,15 @@ class Room():
     chosen_option:int
     list_of_options:list[str]
     dead:bool = False
+    win:bool = False
+
+    def __init__(self,items,conditions):
+        # asigns pointers to variables in game.py
+        self.items = items
+        self.conditions = conditions
 
     def room_print(self):
         # Runs formatter to format the printed info, and lists options
-
         self.formatter()
         print()
         print(self.room_description)
