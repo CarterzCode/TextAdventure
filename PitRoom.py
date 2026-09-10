@@ -26,8 +26,8 @@ class PitRoom(Room):
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
-        self.death_list_of_options = self.list_of_options
-        self.death_shoes_in_room = self.shoes_in_room
+        self.death_list_of_options: list[str] = self.list_of_options
+        self.death_shoes_in_room: bool = self.shoes_in_room
 
     def death_button(self):
         # Writes death room conditions to current conditions

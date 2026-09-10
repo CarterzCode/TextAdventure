@@ -16,7 +16,7 @@ class HiddenRoom(Room):
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
-        self.death_list_of_options = self.list_of_options
+        self.death_list_of_options: list[str] = self.list_of_options
 
     def death_button(self):
         # Writes death room conditions to current conditions
@@ -58,7 +58,7 @@ class HiddenRoom(Room):
 
         if 'Look through the papers.' in self.list_of_options[option-1]:
             self.paper_outcome(
-                "You skim through the papers, finding most of them to be boring technical papers, you find an unlabled note with some numbers and a long technical paper that seems marginally interesting."
+                "You skim through the papers, finding most of them to be boring technical papers, you find an unlabeled note with some numbers and a long technical paper that seems marginally interesting."
             )
 
         elif 'Leave the room.' in self.list_of_options[option-1]:
@@ -76,14 +76,14 @@ class HiddenRoom(Room):
 
         elif 'Skim through the long technical paper.' in self.list_of_options[option-1]:
             self.flavor_outcome(
-                "You start to skim through the paper, finding most of it uninteresting, eventually you find something that seems relevant, \"-it has become apparent that there are an infinite number of universes, hence there is an infinite amount of versions of our universe at all points along its course. This technology will allow the transfer of a consciousness to any of these universes along any point in its course-\" the rest doesn't seem relevant.",
+                "You start to skim through the paper, finding most of it uninteresting, eventually you find something that seems relevant, \"-it has become apparent that there are an infinite number of universes, hence there is an infinite number of versions of our universe at all points along its course. This technology will allow the transfer of a consciousness to any of these universes along any point in its course-\" the rest doesn't seem relevant.",
                 True
             )
 
         elif 'Take replacement parts from the computer.' in self.list_of_options[option-1]:
             self.item_outcome(
                 'replacement_part',
-                "You open the computer with your screwdrier and find the replacement part.",
+                "You open the computer with your screwdriver and find the replacement part.",
                 True
             )
 

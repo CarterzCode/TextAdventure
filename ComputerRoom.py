@@ -17,8 +17,8 @@ class ComputerRoom(Room):
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
-        self.death_list_of_options: str = self.list_of_options
-        self.death_computer_working: str = self.computer_working
+        self.death_list_of_options: list[str] = self.list_of_options
+        self.death_computer_working: bool = self.computer_working
 
     def death_button(self):
         # Writes death room conditions to current conditions
@@ -62,7 +62,7 @@ class ComputerRoom(Room):
             if self.computer_working:
                 self.item_outcome(
                     'escape_coords',
-                    "The computer whirs to life, you look through some of the documents and find a seemingly relevant one that oulines coordinates for what looks like the table you woke up on.",
+                    "The computer whirs to life, you look through some of the documents and find a seemingly relevant one that outlines coordinates for what looks like the table you woke up on.",
                     True
                 )
             else:

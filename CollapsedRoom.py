@@ -5,16 +5,16 @@ from Room import Room
 class CollapsedRoom(Room):
 
     def death_outcome(self,text: str,condition: str):
-            # Outcome handling for death, text is for printing, condition is for adding to the list of conditions
-            self.conditions.append(condition)
-            print(text)
-            self.dead = True
+        # Outcome handling for death, text is for printing, condition is for adding to the list of conditions
+        self.conditions.append(condition)
+        print(text)
+        self.dead = True
 
     def move_rooms(self,room: "Room",room2: "Room",room3: "Room"):
-            # Defines rooms you can move to, arguments are used to link rooms
-            self.CHAMBER_ROOM = room
-            self.HIDDEN_ROOM = room2
-            self.PIT_ROOM = room3
+        # Defines rooms you can move to, arguments are used to link rooms
+        self.CHAMBER_ROOM = room
+        self.HIDDEN_ROOM = room2
+        self.PIT_ROOM = room3
             
 
 
@@ -33,7 +33,7 @@ class CollapsedRoom(Room):
         self.list_of_options = self.death_list_of_options   
     
     def formatter(self):
-    # Formats the room description based on factors
+        # Formats the room description based on factors
         if 'entering' in self.conditions:
             self.entering: str = "As you enter the room, the smell of sulfur hits your nose, the room is covered in burn marks, seemingly recent. "
             self.conditions.remove('entering')
@@ -82,7 +82,7 @@ class CollapsedRoom(Room):
         if 'Enter the room you woke up in.' in self.list_of_options[option-1]:
             self.location_outcome(
                  self.CHAMBER_ROOM,
-                 "You enter the room you woke up in"
+                 "You enter the room you woke up in."
                  )    
     
         elif 'Try to remove the rubble.' in self.list_of_options[option-1]:
