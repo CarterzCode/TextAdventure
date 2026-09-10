@@ -2,7 +2,7 @@ from Room import Room
 
 class VentRoom(Room):
 
-    def move_rooms(self,room,room2):
+    def move_rooms(self,room: "Room",room2: "Room"):
         # Defines rooms you can move to
         self.HIDDEN_ROOM = room
         self.CHAMBER_ROOM = room2
@@ -36,7 +36,7 @@ class VentRoom(Room):
         print("You kick the covering off and climb out of the vent, the smell of the outdoors hits you as you look around at the rich greens of a forest.")
         self.win = True
 
-    def outcome(self,option):
+    def outcome(self,option: int):
         # Outcome handling of chosen action, option is for chosen option
 
         if 'Reenter the hidden room.' in self.list_of_options[option-1]:

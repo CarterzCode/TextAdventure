@@ -2,7 +2,7 @@ from Room import Room
 
 class ChamberRoom(Room):
 
-    def move_rooms(self,room):
+    def move_rooms(self,room: "Room"):
         # Defines rooms you can move to
         self.COLLAPSED_ROOM = room
 
@@ -20,10 +20,10 @@ class ChamberRoom(Room):
     def death_storage(self):
         # Stores room conditions in case you use the death button
 
-        self.death_list_of_options = self.list_of_options
-        self.death_button_broken = self.button_broken
-        self.death_button_react = self.button_react
-        self.death_button_press = self.button_press
+        self.death_list_of_options: list[str] = self.list_of_options
+        self.death_button_broken: str = self.button_broken
+        self.death_button_react: str = self.button_react
+        self.death_button_press: int = self.button_press
 
     def death_button(self):
         # Writes death room conditions to current conditions
@@ -33,7 +33,7 @@ class ChamberRoom(Room):
         self.button_react = self.death_button_react
         self.button_press = self.death_button_press
 
-    def button_outcome(self,text):
+    def button_outcome(self,text: str):
         # Outcome for unique action in this room
 
         print(text)
@@ -52,7 +52,7 @@ class ChamberRoom(Room):
             self.waking = "You wake up on a cold table in a dimly lit room, d"
             self.conditions.remove('waking')
         else:
-            if 'died' and 'waking' in self.conditions:
+            if 'died' in self.conditions and 'waking' in self.conditions:
                 self.waking = "You suddenly jolt awake on the same cold table you initially woke up on, the room seems the same as before you woke up, you remove the plug in the back of your head. D"
                 self.conditions.remove('waking')
             else:
@@ -88,10 +88,10 @@ class ChamberRoom(Room):
 
     def win_outcome(self):
         # Outcome for winning, prints text and turns win on
-        print("You plug yourself back into the machine and put the coordinates in, in an instant you find yourself on top of a hill, the horizon nothing but endless rolling fields of verdant grass, you feel peaceful.")
+        print("You plug yourself back into the machine and put the coordinates in. In an instant you find yourself on top of a hill, the horizon nothing but endless rolling fields of verdant grass, you feel peaceful.")
         self.win = True
 
-    def outcome(self,option):
+    def outcome(self,option: int):
         # Outcome handling of chosen action, option is for chosen option
 
         if 'Put the clothes on.' in self.list_of_options[option-1]:

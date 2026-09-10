@@ -2,7 +2,7 @@ from Room import Room
 
 class ToolRoom(Room):
 
-    def move_rooms(self,room):
+    def move_rooms(self,room: "Room"):
         # Defines rooms you can move to
         self.PIT_ROOM = room
 
@@ -33,7 +33,7 @@ class ToolRoom(Room):
         self.room_description:str = (f"The room smells of oil, and is filled with tables covered in tools whose purpose eludes you. {self.screwdriver_in_room}")
     
 
-    def outcome(self,option):
+    def outcome(self,option: int):
         # Outcome handling of chosen action, option is for chosen option
 
         if 'Reenter the pit room.' in self.list_of_options[option-1]:

@@ -10,7 +10,7 @@ class PitRoom(Room):
         self.COMPUTER_ROOM = room2
         self.TOOL_ROOM = room3
 
-    def death_condition_outcome(self,text,condition):
+    def death_condition_outcome(self,text: str,condition: str):
         # Outcome handling for death
         self.conditions.append(condition)
         print(text)
@@ -35,7 +35,7 @@ class PitRoom(Room):
         self.list_of_options = self.death_list_of_options 
         self.shoes_in_room = self.death_shoes_in_room
 
-    def shoe_outcome(self,text,shoe_status):
+    def shoe_outcome(self,text: str,shoe_status: bool):
         # Handles shoe logic
 
         print(text)
@@ -76,7 +76,7 @@ class PitRoom(Room):
         self.room_description:str = (f"The room has a large pit in the middle of it where the floor has fallen out, you {self.elite_pit_knowledge}. A beam precariously crosses the pit.{self.shoes}")
     
 
-    def outcome(self,option):
+    def outcome(self,option: int):
         # Outcome handling of chosen action, option is for the chosen option
 
         if 'Cross the pit and put some random numbers into the locked door\'s keypad.' in self.list_of_options[option-1]:
@@ -99,7 +99,7 @@ class PitRoom(Room):
             else:
                 self.location_outcome(
                     self.TOOL_ROOM,
-                    "You cross the pit safely and enter the open room on the other side of the room."
+                    "You cross the pit safely and enter the open door on the other side of the room."
                 )
         
         elif 'Jump into the pit.' in self.list_of_options[option-1]:
@@ -135,7 +135,7 @@ class PitRoom(Room):
             else:
                 self.location_outcome(
                     self.COMPUTER_ROOM,
-                    "You cross the pit and put the paper\'s numbers into the door, causing it to open. You walk in"
+                    "You cross the pit and put the paper\'s numbers into the door, causing it to open. You walk in."
                 )
                 self.list_of_options.remove('Cross the pit and put the note\'s numbers into the locked door\'s keypad.')
                 self.list_of_options.append('Enter the room with the locked door.')
