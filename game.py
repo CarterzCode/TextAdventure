@@ -49,8 +49,8 @@ def main() -> None:
             room.death_button()
 
     # Game running logic
-    gamerunning = True
-    while gamerunning:
+    game_running = True
+    while game_running:
         # Runs the game with function calls
 
         if current_location.win:
