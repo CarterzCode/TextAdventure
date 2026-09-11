@@ -75,6 +75,7 @@ def main() -> None:
                 room.initializer()
             death_location = current_location
             death_items:list[str] = items
+            items = []
             current_location = CHAMBER_ROOM
             if 'blocking_rubble' in conditions:
                 removed_rubble = True
