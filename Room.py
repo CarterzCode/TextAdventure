@@ -46,7 +46,8 @@ class Room():
 
     def item_outcome(self,item: str,text: str,remove: bool):
         # Outcome handling for items, item is for the added item, text is for printing, remove is to see if the option should be removed or not
-
+        print("item")
+        print(item)
         self.items.append(item)
         print(text)
         if remove:

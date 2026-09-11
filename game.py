@@ -52,6 +52,7 @@ def main() -> None:
     game_running = True
     while game_running:
         # Runs the game with function calls
+        print(items)
 
         if current_location.win:
             gamerunning = False
@@ -75,6 +76,7 @@ def main() -> None:
                 room.initializer()
             death_location = current_location
             death_items:list[str] = items
+            print("hamburger")
             items = []
             current_location = CHAMBER_ROOM
             if 'blocking_rubble' in conditions:
